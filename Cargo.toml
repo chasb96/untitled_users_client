@@ -1,0 +1,9 @@
+[package]
+name = "users_client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7.5", features = ["multipart"] }
+reqwest = "0.12.4"
+prost = { version = "0.13.0" }
