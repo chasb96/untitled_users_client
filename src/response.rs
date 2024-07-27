@@ -9,13 +9,13 @@ pub struct CreateUserResponse {
 #[derive(Message)]
 pub struct ListUsersResponse {
     #[prost(message, repeated, tag = "1")]
-    users: Vec<UserResponse>,
+    pub users: Vec<UserResponse>,
 }
 
 #[derive(Message)]
 pub struct UserResponse {
     #[prost(string, tag = "1")]
-    id: String,
+    pub id: String,
     #[prost(string, tag = "2")]
-    username: String,
+    pub username: String,
 }
