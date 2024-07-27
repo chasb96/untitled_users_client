@@ -1,22 +1,6 @@
 use prost::Message;
 
 #[derive(Message)]
-pub struct SearchResponse {
-    #[prost(message, repeated, tag = "1")]
-    pub records: Vec<SearchRecord>,
-}
-
-#[derive(Message)]
-pub struct SearchRecord {
-    #[prost(string, tag = "1")]
-    pub user_id: String,
-    #[prost(string, tag = "2")]
-    pub username: String,
-    #[prost(float, tag = "3")]
-    pub score: f32,
-}
-
-#[derive(Message)]
 pub struct CreateUserResponse {
     #[prost(string, tag = "1")]
     pub id: String,
