@@ -50,10 +50,15 @@ impl UsersClient {
         Ok(UserResponse::decode(response)?)
     }
 
-    pub async fn list_users(&self, user_ids: Option<Vec<String>>) -> Result<ListUsersResponse, Error> {
+    pub async fn list_users(&self, user_ids: Vec<String>) -> Result<ListUsersResponse, Error> {
+        let query: Vec<(&str, String)> = user_ids
+            .into_iter()
+            .map(|user_id| ("uids", user_id))
+            .collect();
+
         let response = self.http_client
             .get(format!("{}/users", self.base_url))
-            .query(&[("uids", user_ids)])
+            .query(&query)
             .header(ACCEPT, "application/octet-stream")
             .send()
             .await?
