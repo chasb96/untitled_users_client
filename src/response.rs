@@ -1,4 +1,5 @@
 use prost::Message;
+use std::collections::HashMap;
 
 #[derive(Message)]
 pub struct CreateUserResponse {
@@ -17,5 +18,17 @@ pub struct UserResponse {
     #[prost(string, tag = "1")]
     pub id: String,
     #[prost(string, tag = "2")]
+    pub username: String,
+}
+
+#[derive(Message)]
+pub struct MapUsersResponse {
+    #[prost(map = "string, message", tag = "1")]
+    pub users: HashMap<String, MapUserResponse>,
+}
+
+#[derive(Message, PartialEq)]
+pub struct MapUserResponse {
+    #[prost(string, tag = "1")]
     pub username: String,
 }

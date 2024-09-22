@@ -69,6 +69,25 @@ impl UsersClient {
         Ok(response::ListUsersResponse::decode(response)?)
     }
 
+    pub async fn map_users(&self, user_ids: Vec<String>) -> Result<MapUsersResponse, Error> {
+        let query: Vec<(&str, String)> = user_ids
+            .into_iter()
+            .map(|user_id| ("uids", user_id))
+            .collect();
+
+        let response = self.http_client
+            .get(format!("{}/users/map", self.base_url))
+            .query(&query)
+            .header(ACCEPT, "application/octet-stream")
+            .send()
+            .await?
+            .error_for_status()?
+            .bytes()
+            .await?;
+
+        Ok(response::MapUsersResponse::decode(response)?)
+    }
+
     pub async fn create_user(&self, request: CreateUserRequest) -> Result<CreateUserResponse, Error> {
         let response = self.http_client
             .post(format!("{}/users", self.base_url))
