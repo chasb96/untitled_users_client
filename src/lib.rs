@@ -101,6 +101,20 @@ impl UsersClient {
 
         Ok(CreateUserResponse::decode(response)?)
     }
+
+    pub async fn update_user(&self, user_id: String, request: UpdateUserRequest) -> Result<(), Error> {
+        self.http_client
+            .put(format!("{}/users/{}", self.base_url, &user_id))
+            .header(CONTENT_TYPE, "application/octet-stream")
+            .body(request.encode_to_vec())
+            .send()
+            .await?
+            .error_for_status()?
+            .bytes()
+            .await?;
+
+        Ok(())
+    }
 }
 
 impl Default for UsersClient {

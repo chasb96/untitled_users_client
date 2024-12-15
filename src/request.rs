@@ -11,3 +11,11 @@ pub struct CreateUserRequest {
     #[prost(string, tag = "1")]
     pub username: String,
 }
+
+#[derive(Message)]
+pub struct UpdateUserRequest {
+    #[prost(string, tag = "1")]
+    pub username: String,
+    #[prost(optional, string, tag = "2")]
+    pub profile_picture: Option<String>,
+}
