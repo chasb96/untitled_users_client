@@ -19,6 +19,8 @@ pub struct UserResponse {
     pub id: String,
     #[prost(string, tag = "2")]
     pub username: String,
+    #[prost(optional, string, tag = "3")]
+    pub profile_picture: Option<String>,
 }
 
 #[derive(Message)]
